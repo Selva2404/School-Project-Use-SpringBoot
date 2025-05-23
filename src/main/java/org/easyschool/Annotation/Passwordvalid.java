@@ -3,7 +3,7 @@ package org.easyschool.Annotation;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 import org.easyschool.Validater.PasswordvalidValidator;
-import org.springframework.lang.Contract;
+
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

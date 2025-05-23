@@ -1,9 +1,6 @@
 package org.easyschool.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -16,6 +13,7 @@ public class Roles extends commonEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+  //  @Column(name = "role_id")
     private int roleid;
     @NotNull
     @NotBlank()

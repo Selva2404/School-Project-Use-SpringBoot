@@ -33,10 +33,15 @@ public class Registercontroller {
     @PostMapping("/createUser")
     public String createUser(@Valid @ModelAttribute("person") person person, Errors errors) {
 
+        log.info("Creating user {}", person.toString());
+        if(errors.hasErrors()){
+            return "register";
+        }
         boolean isSave=personService.setPerson(person);
-       // model.addAttribute("person", new person());
-        //log.debug("Registercontroller createUser method called  "+person);
-        return "redirect:/login?register=true";
+        if(isSave)
+                return "redirect:/login?register=true";
+        else
+            return "redirect:/register?error=true";
     }
 
 }
