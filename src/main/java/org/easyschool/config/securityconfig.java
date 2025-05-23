@@ -21,10 +21,11 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class securityconfig {
 
-        @Bean
-        SecurityFilterChain defaultsecurityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.ignoringRequestMatchers("/saveMsg").ignoringRequestMatchers("/public/**"));
-                http.authorizeHttpRequests(auth -> auth
+    @Bean
+    SecurityFilterChain defaultsecurityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(csrf -> csrf.ignoringRequestMatchers("/saveMsg")
+                .ignoringRequestMatchers("/public/**"));
+        http.authorizeHttpRequests(auth -> auth
                         .requestMatchers("/dashboard").authenticated()
                         .requestMatchers("/displayMessages").hasRole("ADMIN")
                         .requestMatchers("/closeMsg/**").hasRole("ADMIN")
@@ -41,30 +42,16 @@ public class securityconfig {
                 )
                 .formLogin(form -> form.loginPage("/login")
                         .defaultSuccessUrl("/dashboard", true).failureUrl("/login?error=true"));
-                http.headers(headers ->headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
+        http.headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
         return http.build();
-        }
-
-    @Bean
-    public InMemoryUserDetailsManager userDetailsService(PasswordEncoder passwordEncoder ) {
-
-        UserDetails user = User.builder()
-                .username("user")
-                .password(passwordEncoder.encode("12345"))
-                .roles("USER")
-                .build();
-        UserDetails admin =User.builder()
-                .username("admin")
-                .password(passwordEncoder.encode("54321"))
-                .roles("ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(user, admin);
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    }
+}
+
+
 
 

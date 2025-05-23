@@ -20,7 +20,7 @@ import org.easyschool.Annotation.Passwordvalid;
         message = " password do not match"
 ),
 @Failedvalied(
-        field = "mail_id",
+        field = "mailid",
         fieldMatch = "conform_mail_id",
         message = " email do not match"
 )})
@@ -31,12 +31,12 @@ public class person extends commonEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int person_id;
     @OneToOne(fetch =FetchType.EAGER,cascade=CascadeType.ALL,targetEntity = Address.class)
-    @JoinColumn(name = "address_id",referencedColumnName = "addressid",
+    @JoinColumn(name = "addressid",referencedColumnName = "addressid",
             nullable = true)
     private Address address;
 
     @OneToOne(fetch =FetchType.EAGER,cascade=CascadeType.PERSIST,targetEntity = Roles.class)
-    @JoinColumn(name = "role_id",referencedColumnName = "roleid",
+    @JoinColumn(name = "roleid",referencedColumnName = "roleid",
             nullable = true)
     private Roles role;
     @NotNull
@@ -49,20 +49,20 @@ public class person extends commonEntity {
     @NotNull
     @Email
     @NotBlank(message ="please fill the mail id")
-    private String mail_id;
+    private String mailid;
     @NotNull
-    @NotBlank(message ="please fill the mail id")
+    @NotBlank(message ="please fill the confirm mail id")
     @Email
     @Transient
     private String conform_mail_id;
 
     @NotNull
-    @NotBlank(message ="please fill the mail id")
+    @NotBlank(message ="please fill the password")
     @Passwordvalid
     private String pwd;
 
     @NotNull
-    @NotBlank(message ="please fill the mail id")
+    @NotBlank(message ="please fill the confirm password")
    @Transient
     private String confirmPwd;
 

@@ -42,8 +42,8 @@
             <div class="row login-block">
                 <div class="col-md-7 login-center">
                     <ul>
-                        <li class="alert alert-danger" role="alert" th:each="error : ${#fields.errors('person.*')}" th:text="${error}">
-                        </li>
+                        <li class="alert alert-danger" role="alert" th:each="error : ${#fields.errors('person.*')}" th:text="${error}" />
+
                     </ul>
                     <form th:action="@{/public/createUser}" method="post" class="signin-form" th:object="${person}">
                         <div class="title-main text-center mx-auto mb-md-5 mb-4" style="max-width:500px;">
@@ -52,44 +52,44 @@
                         <div class="input-grids">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label>
+
                                         <input type="text" th:field="*{name}" placeholder="Name"
                                             class="contact-input" />
-                                    </label>
+
                                 </div>
                                 <div class="col-sm-6">
-                                    <label>
+
                                         <input type="text" th:field="*{mobileNum}" placeholder="Mobile Number"
                                             class="contact-input" />
-                                    </label>
+
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label>
-                                        <input type="text" th:field="*{mail_id}" placeholder="Email"
+
+                                        <input type="text" th:field="*{mailid}" placeholder="Email"
                                                class="contact-input" />
-                                    </label>
+
                                 </div>
                                 <div class="col-sm-6">
-                                    <label>
+
                                         <input type="text" th:field="*{conform_mail_id}" placeholder="Confirm Email"
                                                class="contact-input" />
-                                    </label>
+
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label>
+
                                         <input type="password" th:field="*{pwd}" placeholder="Password"
                                                class="contact-input" />
-                                    </label>
+
                                 </div>
                                 <div class="col-sm-6">
-                                    <label>
+
                                         <input type="password" th:field="*{confirmPwd}" placeholder="Confirm Password"
                                                class="contact-input" />
-                                    </label>
+
                                 </div>
                             </div>
 

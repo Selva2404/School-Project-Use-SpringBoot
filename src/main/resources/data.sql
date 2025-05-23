@@ -14,3 +14,10 @@ INSERT INTO holidays(holiday_date,holiday_name,type,created_at,created_by)
     VALUES('Sep 5','Labor Day','FEDERAL',CURRENT_DATE,'DBA');
 INSERT INTO holidays(holiday_date,holiday_name,type,created_at,created_by)
     VALUES('Nov 11','Veterans Day','FEDERAL',CURRENT_DATE,'DBA');
+
+INSERT INTO roles(role_name,created_at,created_by)
+    VALUES('Student',CURRENT_DATE,'DBA');
+
+INSERT INTO roles(role_name,created_at,created_by)
+    VALUES('Admin',CURRENT_DATE,'DBA');
+
