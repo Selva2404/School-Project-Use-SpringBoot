@@ -3,7 +3,7 @@ package org.easyschool.service;
 import lombok.extern.slf4j.Slf4j;
 import org.easyschool.Model.Contect;
 import org.easyschool.Repository.contectRpo;
-import org.easyschool.controller.EasySchoolConsent;
+import org.easyschool.Consents.EasySchoolConsent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

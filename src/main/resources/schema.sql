@@ -39,7 +39,7 @@ create TABLE IF NOT EXISTS address(
     address2 varchar(100) defaul NULL,
     city varchar(100) NOT NULL,
     state varchar(100) NOT NULL,
-    zip_code int NOT NULL,
+    zipcode int NOT NULL,
     created_at TIMESTAMP NOT NULL,
     created_by varchar(50) NOT NULL,
     update_at TIMESTAMP DEFAULT NULL,
