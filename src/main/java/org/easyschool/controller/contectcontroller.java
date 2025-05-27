@@ -31,6 +31,7 @@ public class contectcontroller {
 
     @Autowired
     public void contectservice(contectservice contectservice) {
+
         this.contectservice = contectservice;
     }
 
