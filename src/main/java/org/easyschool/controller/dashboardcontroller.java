@@ -25,10 +25,13 @@ public class dashboardcontroller {
         if (authentication == null) {
             return "redirect:/login";
         }
-        person person=personRepository.readByMailid(authentication.getName());
-        model.addAttribute("usernames",person.getName());
-        model.addAttribute("roles",authentication.getAuthorities().toString());
-        httpSession.setAttribute("defaultDisplay",person);
+        person person = personRepository.readByMailid(authentication.getName());
+        model.addAttribute("usernames", person.getName());
+        model.addAttribute("roles", authentication.getAuthorities().toString());
+        if (person.getClasses() != null && person.getClasses().getClassName() != null) {
+            model.addAttribute("className", person.getClasses().getClassName().toString());
+        }
+        httpSession.setAttribute("defaultDisplay", person);
         return "dashboard";
     }
 

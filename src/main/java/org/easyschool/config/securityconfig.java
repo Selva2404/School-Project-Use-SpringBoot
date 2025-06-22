@@ -19,13 +19,16 @@ public class securityconfig {
     @Bean
     SecurityFilterChain defaultsecurityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.ignoringRequestMatchers("/saveMsg")
-                .ignoringRequestMatchers("/public/**")
+                .ignoringRequestMatchers("/public/**").ignoringRequestMatchers("/api/**")
                 );
         http.authorizeHttpRequests(auth -> auth
                         .requestMatchers("/dashboard").authenticated()
-                        .requestMatchers("/displayMessages").hasRole("Admin")
+                        .requestMatchers("/displayMessages/**").hasRole("Admin")
                         .requestMatchers("/closeMsg/**").hasRole("Admin")
+                        .requestMatchers("/admin/**").hasRole("Admin")
+                        .requestMatchers("/student/**").hasRole("Student")
                         .requestMatchers("/viewProfile").authenticated()
+                        .requestMatchers("/api/**").permitAll()
                         .requestMatchers("/updateProfile").authenticated()
                         .requestMatchers("/about").permitAll()
                         .requestMatchers("/contact/**").permitAll()

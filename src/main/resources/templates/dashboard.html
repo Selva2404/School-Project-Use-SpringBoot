@@ -43,6 +43,7 @@ Author URL: http://w3layouts.com
         <div class="title-main text-center mx-auto mb-md-5 mb-4" style="max-width:500px;">
             <h3 class="title-style" th:text="'Welcome - ' + ${usernames}"></h3>
             <p class="" th:text="'You logged in as - ' + ${roles}"></p>
+            <p class="" th:text="'You are in  - ' + ${className}"></p>
         </div>
 
     </div>
@@ -51,7 +52,7 @@ Author URL: http://w3layouts.com
 <div class="container py-md-5 py-4">
     <div class="section__content section__content--p30">
         <div class="container-fluid">
-            <div class="reo m-t-25">
+            <div class="reo m-t-25" style="display: flex">
                 <div class="col-sm-6 col-lg-3">
                     <a th:href="@{/viewProfile}">
                         <div class="overview-item overview-item--c4">
@@ -69,7 +70,7 @@ Author URL: http://w3layouts.com
                     </a>
                 </div>
                 <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_Admin')" >
-                    <a href="/displayMessages" >
+                    <a th:href="@{/displayMessages/page/1?sortField=name&sortDir=desc}" >
                         <div class="overview-item overview-item--c3">
                             <div class="overview__inner">
                                 <div class="overview-box clearfix">
@@ -78,6 +79,54 @@ Author URL: http://w3layouts.com
                                     </div>
                                     <div class="text">
                                         <h2>Messages</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_Admin')" >
+                    <a th:href="@{/admin/classes}" >
+                        <div class="overview-item overview-item--c3">
+                            <div class="overview__inner">
+                                <div class="overview-box clearfix">
+                                    <div class="icon">
+                                        <i  class="fas fa-envelope-open-text"></i>
+                                    </div>
+                                    <div class="text">
+                                        <h2>Classes</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_Admin')" >
+                    <a href="/admin/courses" >
+                        <div class="overview-item overview-item--c3">
+                            <div class="overview__inner">
+                                <div class="overview-box clearfix">
+                                    <div class="icon">
+                                        <i  class="fas fa-envelope-open-text"></i>
+                                    </div>
+                                    <div class="text">
+                                        <h2>Courses</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_Student')" >
+                    <a href="/student/courses" >
+                        <div class="overview-item overview-item--c3">
+                            <div class="overview__inner">
+                                <div class="overview-box clearfix">
+                                    <div class="icon">
+                                        <i  class="fas fa-envelope-open-text"></i>
+                                    </div>
+                                    <div class="text">
+                                        <h2>Courses</h2>
                                     </div>
                                 </div>
                             </div>

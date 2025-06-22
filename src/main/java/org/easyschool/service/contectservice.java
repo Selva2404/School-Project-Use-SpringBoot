@@ -5,6 +5,10 @@ import org.easyschool.Model.Contect;
 import org.easyschool.Repository.contectRpo;
 import org.easyschool.Consents.EasySchoolConsent;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -30,19 +34,17 @@ public class contectservice {
         }
         return flag;
     }
-   public List<Contect> getData(){
-         return contectRpo.findByStatus(EasySchoolConsent.open);
+   public Page<Contect> getData(int pageNum, String sortField, String sortDir){
+        int pageSize = 5;
+       Pageable pageable = PageRequest.of(pageNum-1, pageSize,
+               sortDir.equals("asc") ? Sort.by(sortField).ascending() : Sort.by(sortField).descending());
+         return contectRpo.findByStatus(EasySchoolConsent.open,pageable);
     }
 
     public void updateMsgClose(int id, String name){
-       log.debug("closeMsg controller id"+id);
-        Optional<Contect> contect =contectRpo.findById(id);
-        if(contect.isPresent()) {
-            Contect c = contect.get();
-            c.setStatus(EasySchoolConsent.close);
-            c.setUpdateBy(name);
-            c.setUpdateAt(LocalDateTime.now());
-            contectRpo.save(c);
-        }
+
+           contectRpo.updateMsgStatusNative(EasySchoolConsent.close,id);
+
     }
+
 }

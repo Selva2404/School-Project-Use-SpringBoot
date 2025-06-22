@@ -5,13 +5,18 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import org.easyschool.Annotation.Failedvalied;
 import org.easyschool.Annotation.Passwordvalid;
 
+import java.util.HashSet;
+import java.util.Set;
 
-@Data
+
+@Setter
+@Getter
 @Entity
 @EqualsAndHashCode(callSuper = true)
 @Failedvalied.List({@Failedvalied(
@@ -39,6 +44,17 @@ public class person extends commonEntity {
     @JoinColumn(name = "roleid",referencedColumnName = "roleid",
             nullable = true)
     private Roles role;
+    @ManyToOne(fetch = FetchType.EAGER, optional = true)
+    @JoinColumn(name = "classId", referencedColumnName = "classid", nullable = true)
+    private Classes classes;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST,targetEntity = Courses.class)
+    @JoinTable(name = "person_courses",
+    joinColumns = {
+            @JoinColumn(name = "person_id", referencedColumnName = "person_id")},
+    inverseJoinColumns = {
+            @JoinColumn(name = "courses_id", referencedColumnName = "coursesId")})
+    private Set<Courses> courses=new HashSet<>();
     @NotNull
     @NotBlank(message ="please fill the value")
     private String name;
@@ -65,6 +81,8 @@ public class person extends commonEntity {
     @NotBlank(message ="please fill the confirm password")
    @Transient
     private String confirmPwd;
+
+
 
 
 
