@@ -1,5 +1,6 @@
 package org.easyschool.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
@@ -19,14 +20,18 @@ public class commonEntity {
 
     @CreatedDate
     @Column(updatable = false)
+    @JsonIgnore
     LocalDateTime createdAt;
     @CreatedBy
     @Column(updatable = false)
+    @JsonIgnore
     String createdBy;
     @LastModifiedDate
     @Column(updatable = false)
+    @JsonIgnore
     LocalDateTime updateAt;
     @LastModifiedBy
     @Column(updatable = false)
+    @JsonIgnore
     String updateBy;
 }

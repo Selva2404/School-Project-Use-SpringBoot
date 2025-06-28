@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.easyschool.Model.Contect;
 import org.easyschool.service.contectservice;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +32,7 @@ public class contectcontroller {
 
     @Autowired
     public void contectservice(contectservice contectservice) {
+
         this.contectservice = contectservice;
     }
 
@@ -45,19 +47,29 @@ public class contectcontroller {
         return "redirect:/contact";
     }
 
-    @RequestMapping( "/displayMessages" )
-    public ModelAndView getContactdDtails(){
-        List<Contect> contactmsg=contectservice.getData();
+    @RequestMapping( "/displayMessages/page/{pageNum}" )
+    public ModelAndView getContactdDtails(Model model,
+                                          @PathVariable(name="pageNum")int pageNum,
+                                          @RequestParam("sortField")String sortField,
+                                          @RequestParam("sortDir")String sortDir){
+        Page<Contect> contactmsg=contectservice.getData(pageNum,sortField,sortDir);
+        List<Contect> pagemsg=contactmsg.getContent();
         ModelAndView view = new ModelAndView("messages.html");
-        view.addObject("contactmsg",contactmsg);
+        model.addAttribute("currentPage",pageNum);
+        model.addAttribute("totalPages",contactmsg.getTotalPages());
+        model.addAttribute("totalMsgs",contactmsg.getTotalElements());
+        model.addAttribute("sortField",sortField);
+        model.addAttribute("sortDir",sortDir);
+        model.addAttribute("reverseSortDir",sortDir.equals("asc")?"desc":"asc");
+        view.addObject("contactMsgs",pagemsg);
         return view;
 
     }
 
     @GetMapping("/closeMsg")
     public String closeMsg(@RequestParam() int id, Authentication auth){
-        log.debug("closeMsg controller id"+id);
+       // log.debug("closeMsg controller id"+id);
         contectservice.updateMsgClose(id, auth.getName() );
-        return "redirect:/displayMessages";
+        return "redirect:/displayMessages/page/1?sortField=name&sortDir=desc";
     }
 }
