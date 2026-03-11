@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableJpaRepositories(value = "org.easyschool.Repository")
-@EntityScan("org.easyschool.Model")
+@EntityScan("org.easyschool")
 @EnableJpaAuditing(auditorAwareRef = "AuditingAwarIm")
 public class EasySchoolProApplication {
     public static void main(String[] args) {

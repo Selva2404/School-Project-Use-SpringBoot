@@ -5,7 +5,6 @@ import org.easyschool.Consents.EasySchoolConsent;
 import org.easyschool.Model.Address;
 import org.easyschool.Model.Profile;
 import org.easyschool.Model.person;
-import org.easyschool.Repository.AddressRepository;
 import org.easyschool.Repository.personRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

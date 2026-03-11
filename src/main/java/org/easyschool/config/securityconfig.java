@@ -5,6 +5,7 @@ package org.easyschool.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,6 +21,7 @@ public class securityconfig {
     SecurityFilterChain defaultsecurityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.ignoringRequestMatchers("/saveMsg")
                 .ignoringRequestMatchers("/public/**").ignoringRequestMatchers("/api/**")
+                        .ignoringRequestMatchers("/profile/**")
                 );
         http.authorizeHttpRequests(auth -> auth
                         .requestMatchers("/dashboard").authenticated()
@@ -31,6 +33,10 @@ public class securityconfig {
                         .requestMatchers("/api/**").permitAll()
                         .requestMatchers("/updateProfile").authenticated()
                         .requestMatchers("/about").permitAll()
+
+                                .requestMatchers("/explorer/**").permitAll()
+                        .requestMatchers("/profile/**").permitAll()
+                        .requestMatchers("/eazyschool/actuator/**").permitAll()
                         .requestMatchers("/contact/**").permitAll()
                         .requestMatchers("/saveMsg").permitAll()
                         .requestMatchers("/assets/**").permitAll()

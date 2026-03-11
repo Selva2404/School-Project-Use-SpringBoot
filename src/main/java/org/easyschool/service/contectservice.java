@@ -2,6 +2,7 @@ package org.easyschool.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.easyschool.Model.Contect;
+import org.easyschool.Model.getpros;
 import org.easyschool.Repository.contectRpo;
 import org.easyschool.Consents.EasySchoolConsent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class contectservice {
     @Autowired
     contectRpo contectRpo;
 
+    @Autowired
+    getpros getpros;
+
 
     public boolean getdata(Contect contect){
         boolean flag = false;
@@ -34,8 +38,11 @@ public class contectservice {
         }
         return flag;
     }
+
    public Page<Contect> getData(int pageNum, String sortField, String sortDir){
-        int pageSize = 5;
+
+        int pageSize=getpros.getPageSize();
+       // if(getpros.getC)
        Pageable pageable = PageRequest.of(pageNum-1, pageSize,
                sortDir.equals("asc") ? Sort.by(sortField).ascending() : Sort.by(sortField).descending());
          return contectRpo.findByStatus(EasySchoolConsent.open,pageable);

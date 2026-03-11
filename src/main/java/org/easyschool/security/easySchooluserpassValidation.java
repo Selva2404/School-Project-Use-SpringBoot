@@ -37,8 +37,7 @@ public class easySchooluserpassValidation implements AuthenticationProvider
         String email= authentication.getName();
         String password = authentication.getCredentials().toString();
         person person=personRepository.readByMailid(email);
-       // log.info(person.toString());
-        //log.info("possword=> "+password+" "+email);
+
         if(null != password && person.getPerson_id()>0 && passwordEncoder.matches(password,person.getPwd())){
            // log.info("user authenticated successfully=>  "+person.getName());
             return new UsernamePasswordAuthenticationToken(email, "null", getGarantedautherities(person.getRole()));

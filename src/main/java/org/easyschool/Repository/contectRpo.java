@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @Repository
-public interface contectRpo extends JpaRepository<Contect, Integer> {
+public interface  contectRpo extends JpaRepository<Contect, Integer> {
 
     @Query("select c from Contect c where c.status= :open")
     List<Contect> findByStatus(String open);
